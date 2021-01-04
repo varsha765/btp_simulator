@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+
+{% block content%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="content-section">
+    <h1 style="text-align: center">Job Details</h1>
+    
+    <table class="table table-warning table-striped ">
+        <tr>
+            <th>Name</th>
+            
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{task.name}}</td>
+                
+                
+
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/deletej/{{task.id}}"><i class="fa fa-trash" style="color:red;font-size:24px"></i></a>
+                    
+                    <a href="/updatej/{{task.id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                    <a href="/showj/{{task.id}}"><i class="fa fa-eye" style="font-size:24px ;color:black"></i></a>
+                    <a href="/jobtime/{{task.id}}"><i class="fa fa-plus" style="color:green;font-size:24px"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <form  method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Job Details</legend>
+                <div class="form-group">
+                    {{ form.name.label(class="form-control-label") }}
+
+                    {% if form.name.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{%endblock%}
+
