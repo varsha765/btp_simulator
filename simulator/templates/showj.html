@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+
+<title>Job Details</title>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<table style="width:100%">
+<a href="/job">Back</a>
+<div class="content">
+    <h1 style="text-align: center">Job Details</h1>
+     <div class="media">
+        <img class="rounded-circle " src="{{ image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ task.name }}</h2>
+          
+        </div>
+      </div>
+    
+    <table class="table table-danger table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Machine Name</th>
+            <th>setup time</th>
+            <th>processing time</th>
+            <th>post processing time</th>
+            <th>Added</th>
+            
+            
+        </tr>
+        
+        {% for task in tasks %}
+            <tr>
+                <td>{{task_time.machine_name}}</td>
+                <td>{{task_time.setup}}</td>
+                <td>{{task_time.processing}}</td>
+                <td>{{task_time.postprocessing}}</td>
+
+                
+
+                <td>{{ task_time.date_created.date() }}</td>
+                
+            </tr>
+        {% endfor %}
+        
+    </table>
+    
+
+    
+</div>
+{% endblock %}
