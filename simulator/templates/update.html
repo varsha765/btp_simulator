@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<title></title>
+{% endblock %}
+
+{% block content %}
+<div class="name">
+    <h1 style="text-align: center">Update Machine</h1>
+    
+    <div class="form">
+        
+        <form method="POST" action="/update/{{task.id}}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Machine Details</legend>
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label", value="task.name") }}
+
+                {% if form.name.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="failure"><h6>Failure Method:</h6></label>
+                <select id="failure" name="falurelist" form="failureform">
+                    <option value="Weibull">Weibull</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Lognormal">Lognormal</option>
+                    <option value="Exponential">Exponential</option>
+                </select>
+            </div>
+            <div class="form-group">
+                {{ form.eeta.label(class="form-control-label") }}
+                {% if form.eeta.errors %}
+                    {{ form.eeta(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.eeta.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.eeta(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.beta.label(class="form-control-label") }}
+                {% if form.beta.errors %}
+                    {{ form.beta(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.beta.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.beta(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                    
+                <label for="failure"><h6>Repair Method:</h6></label>
+                <select class="selectpicker" data-style="btn-primary" >
+                    <option value="Normal">Normal</option>
+                    <option value="Weibull">Weibull</option>
+                    <option value="Lognormal">Lognormal</option>
+                    <option value="Exponential">Exponential</option>
+                </select>
+            </div>
+            <div class="form-group">
+                {{ form.mean.label(class="form-control-label") }}
+                {% if form.mean.errors %}
+                    {{ form.mean(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.mean.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.mean(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.sd.label(class="form-control-label") }}
+                {% if form.sd.errors %}
+                    {{ form.sd(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.sd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.sd(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.picture.label() }}
+                {{ form.picture(class="form-control-file") }}
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+
+{%endblock%}
+
