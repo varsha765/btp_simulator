@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+
+{% block content%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="content-section">
+    <h1 style="text-align: center">Job Details</h1>
+    
+    <table class="table table-warning table-striped ">
+        <tr>
+            <th>Machine Name</th>
+            <th>Setup</th>
+            <th>Processing</th>
+            <th>Post Processing</th>
+        
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{task.machine_name}}</td>
+                <td>{{task.setup}}</td>
+                <td>{{task.processing}}</td>
+                <td>{{task.postprocessing}}</td>
+                
+                
+
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/deletejt/{{id}}/{{task.id}}"><i class="fa fa-trash" style="color:red;font-size:24px"></i></a>
+                    
+                    <a href="/updatejt/{{id}}/{{task.id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
+
+                    
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <form  method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Job Time Details</legend>
+                <div class="form-group">
+                    {{ form.machine_name.label(class="form-control-label") }}
+
+                    {% if form.machine_name.errors %}
+                        {{ form.machine_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.machine_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.machine_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.setup.label(class="form-control-label") }}
+
+                    {% if form.setup.errors %}
+                        {{ form.setup(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.setup.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.setup(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.processing.label(class="form-control-label") }}
+
+                    {% if form.processing.errors %}
+                        {{ form.processing(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.processing.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.processing(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.postprocessing.label(class="form-control-label") }}
+
+                    {% if form.postprocessing.errors %}
+                        {{ form.postprocessing(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.postprocessing.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.postprocessing(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                
+                
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{%endblock%}
+
