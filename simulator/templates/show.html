@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+
+<title>Machine Details</title>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<table style="width:100%">
+<a href="/machine">Back</a>
+<div class="content">
+    <h1 style="text-align: center">Machine Details</h1>
+    
+     <div class="media" style="sizes:lg">
+        <img class="rounded-circle" src="{{ image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ task.name }}</h2>
+          
+        </div>
+      </div>
+    
+    <table class="table table-danger table-hover">
+        <tr>
+            <th>Name</th>
+            <th>eeta</th>
+            <th>beta</th>
+            <th>mean</th>
+            <th>sd</th>
+            <th>Added</th>
+            
+            
+        </tr>
+        
+        <tr>
+            <td>{{task.name}}</td>
+            <td>{{task.eeta}}</td>
+            <td>{{task.beta}}</td>
+            <td>{{task.mean}}</td>
+            <td>{{task.sd}}</td>
+            
+
+            <td>{{ task.date_created.date() }}</td>
+            
+        </tr>
+        
+    </table>
+    
+
+    
+</div>
+{% endblock %}
