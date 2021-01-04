@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+
+{% block content%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="content-section">
+    <h1 style="text-align: center">Buffer Details</h1>
+    
+    <table class="table table-secondary table-striped ">
+        <tr>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{task.name}}</td>
+                
+                <td>{{task.capacity}}</td>
+
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/deleteb/{{task.id}}"><i class="fa fa-trash" style="color:red;font-size:24px"></i></a>
+                    
+                    <a href="/updateb/{{task.id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                    <a href="/showb/{{task.id}}"><i class="fa fa-eye" style="font-size:24px ;color:black"></i></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <form  method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Buffer Details</legend>
+                <div class="form-group">
+                    {{ form.name.label(class="form-control-label") }}
+
+                    {% if form.name.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.capacity.label(class="form-control-label") }}
+                    {% if form.capacity.errors %}
+                        {{ form.capacity(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.capacity.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.capacity(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{%endblock%}
+
